@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Research</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    /* Apply styling to flex container */
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* Adjust the gap between flex items */
+        justify-content: center; /* Or any other flex container properties you prefer */
+
+
+    }
+
+    /* Apply styling to flex items */
+    .flex-item {
+        flex: 0 0 calc(33.33% - 20px); /* Adjust item width */
+        padding: 20px;
+        border: 1px solid rgb(0, 0, 0) !important;
+        border-radius: 5px !important;
+        background-color: #f9f9f9; /* Or any other background color */
+        margin-bottom: 10px;
+        box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.4);
+    }
+    input[type="date"] {
+        width: 150px; /* Adjust the width */
+        height: 30px; /* Adjust the height */
+        font-size: 14px; /* Adjust the font size */
+        /* Add any other styles you want to modify */
+    }
+</style>
+<body>
+    <div class="container mt-5">
+        <h2>Search Research Data</h2>
+        <form action="#" th:action="@{/getResearchData}" method="get">
+            <div class="form-group">
+                <label for="ticker">Enter Stock Ticker:</label>
+                <input type="text" class="form-control" id="ticker" name="ticker" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" class="form-control" id="startDate" name="startDate" required>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" class="form-control" id="endDate" name="endDate" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+
+
+        <div th:if="${data}">
+            <h3>Data for Stock Ticker: <span th:text="${researchTicker}"></span></h3>
+            <pre th:text="${data}" id="jsonData" style="display: none;"></pre>
+
+            <div class="flex-container">
+                <!-- Iterate through the fetched data to create flex items -->
+                <script type="text/javascript">
+                    var jsonDataString = document.getElementById('jsonData').innerText;
+                    var jsonData = JSON.parse(jsonDataString);
+
+                    var resultsArray = jsonData.results;
+
+                    if (resultsArray && resultsArray.length > 0) {
+                        var flexContainer = document.querySelector('.flex-container');
+
+                        // Loop through the "results" array and create flex items
+                        resultsArray.forEach(function (result) {
+                            var flexItem = document.createElement('div');
+                            flexItem.classList.add('flex-item');
+
+                            function formatDate(unixTimestamp) {
+                                var date = new Date(unixTimestamp);
+
+                                var year = date.getFullYear();
+                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are zero-based
+                                var day = ('0' + date.getDate()).slice(-2);
+                                var hours = ('0' + date.getHours()).slice(-2);
+                                var minutes = ('0' + date.getMinutes()).slice(-2);
+                                var seconds = ('0' + date.getSeconds()).slice(-2);
+
+                                var formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+                                return formattedDateTime;
+                            }
+
+                            // Populate flex item with data
+                            flexItem.innerHTML = `
+                                <p>Volume: ${result.v}</p>
+                                <p>Volume Weighted: ${result.vw}</p>
+                                <p>Open Price: ${result.o}</p>
+                                <p>Close Price: ${result.c}</p>
+                                <p>High Price: ${result.h}</p>
+                                <p>Low Price: ${result.l}</p>
+                                <p>Timestamp: ${formatDate(result.t)}</p>
+                            `;
+
+                            flexContainer.appendChild(flexItem); // Append the flex item to the container
+                        });
+                    } else {
+                        console.log("No results found or empty results array.");
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
