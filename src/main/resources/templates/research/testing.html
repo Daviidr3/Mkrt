@@ -5,6 +5,7 @@
     <title>Search Research</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <style>
     /* Apply styling to flex container */
@@ -27,74 +28,88 @@
         margin-bottom: 10px;
         box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.4);
     }
+
     input[type="date"] {
         width: 150px; /* Adjust the width */
         height: 30px; /* Adjust the height */
         font-size: 14px; /* Adjust the font size */
         /* Add any other styles you want to modify */
+
+    }
+
+    .flex-container {
+        display: flex;
+        justify-content: center; /* Align content horizontally at center */
+        align-items: center; /* Align content vertically at center */
+        height: 500px; /* Set a fixed height for the flex container */
+    }
+
+    .chart-container {
+        border: 1px solid #ccc; /* Border style */
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+        width: 945px; /* Set a fixed width for the chart container */
     }
 </style>
 <body>
-    <div class="container mt-5">
-        <h2>Search Research Data</h2>
-        <form action="#" th:action="@{/getResearchData}" method="get">
-            <div class="form-group">
-                <label for="ticker">Enter Stock Ticker:</label>
-                <input type="text" class="form-control" id="ticker" name="ticker" required>
+<div class="container mt-5">
+    <h2>Search Research Data</h2>
+    <form action="#" th:action="@{/getResearchData}" method="get">
+        <div class="form-group">
+            <label for="ticker">Enter Stock Ticker:</label>
+            <input type="text" class="form-control" id="ticker" name="ticker" required>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="startDate">Start Date:</label>
+                <input type="date" class="form-control" id="startDate" name="startDate" required>
             </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-2">
-                    <label for="startDate">Start Date:</label>
-                    <input type="date" class="form-control" id="startDate" name="startDate" required>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="endDate">End Date:</label>
-                    <input type="date" class="form-control" id="endDate" name="endDate" required>
-                </div>
+            <div class="form-group col-md-2">
+                <label for="endDate">End Date:</label>
+                <input type="date" class="form-control" id="endDate" name="endDate" required>
             </div>
+        </div>
 
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
 
+<!--
+    <div th:if="${data}">
+        <h3>Data for Stock Ticker: <span th:text="${researchTicker}"></span></h3>
+        <pre th:text="${data}" id="jsonData" style="display: none;"></pre>
 
+        <div class="flex-container">
+             Iterate through the fetched data to create flex items
+            <script type="text/javascript">
+                var jsonDataString = document.getElementById('jsonData').innerText;
+                var jsonData = JSON.parse(jsonDataString);
 
-        <div th:if="${data}">
-            <h3>Data for Stock Ticker: <span th:text="${researchTicker}"></span></h3>
-            <pre th:text="${data}" id="jsonData" style="display: none;"></pre>
+                var resultsArray = jsonData.results;
 
-            <div class="flex-container">
-                <!-- Iterate through the fetched data to create flex items -->
-                <script type="text/javascript">
-                    var jsonDataString = document.getElementById('jsonData').innerText;
-                    var jsonData = JSON.parse(jsonDataString);
+                if (resultsArray && resultsArray.length > 0) {
+                    var flexContainer = document.querySelector('.flex-container');
 
-                    var resultsArray = jsonData.results;
+                    // Loop through the "results" array and create flex items
+                    resultsArray.forEach(function (result) {
+                        var flexItem = document.createElement('div');
+                        flexItem.classList.add('flex-item');
 
-                    if (resultsArray && resultsArray.length > 0) {
-                        var flexContainer = document.querySelector('.flex-container');
+                        function formatDate(unixTimestamp) {
+                            var date = new Date(unixTimestamp);
 
-                        // Loop through the "results" array and create flex items
-                        resultsArray.forEach(function (result) {
-                            var flexItem = document.createElement('div');
-                            flexItem.classList.add('flex-item');
+                            var year = date.getFullYear();
+                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are zero-based
+                            var day = ('0' + date.getDate()).slice(-2);
+                            var hours = ('0' + date.getHours()).slice(-2);
+                            var minutes = ('0' + date.getMinutes()).slice(-2);
+                            var seconds = ('0' + date.getSeconds()).slice(-2);
 
-                            function formatDate(unixTimestamp) {
-                                var date = new Date(unixTimestamp);
+                            var formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+                            return formattedDateTime.toString();
+                        }
 
-                                var year = date.getFullYear();
-                                var month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are zero-based
-                                var day = ('0' + date.getDate()).slice(-2);
-                                var hours = ('0' + date.getHours()).slice(-2);
-                                var minutes = ('0' + date.getMinutes()).slice(-2);
-                                var seconds = ('0' + date.getSeconds()).slice(-2);
-
-                                var formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
-                                return formattedDateTime;
-                            }
-
-                            // Populate flex item with data
-                            flexItem.innerHTML = `
+                        // Populate flex item with data
+                        flexItem.innerHTML = `
                                 <p>Volume: ${result.v}</p>
                                 <p>Volume Weighted: ${result.vw}</p>
                                 <p>Open Price: ${result.o}</p>
@@ -104,14 +119,79 @@
                                 <p>Timestamp: ${formatDate(result.t)}</p>
                             `;
 
-                            flexContainer.appendChild(flexItem); // Append the flex item to the container
-                        });
-                    } else {
-                        console.log("No results found or empty results array.");
+                        flexContainer.appendChild(flexItem); // Append the flex item to the container
+                    });
+                } else {
+                    console.log("No results found or empty results array.");
+                }
+            </script>
+            -->
+            <script>
+                google.charts.load('current', {'packages': ['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var jsonDataString = document.getElementById('jsonData1').innerText; // Replace with your JSON data
+                    var jsonData = JSON.parse(jsonDataString);
+
+                    var formattedData = [];
+
+                    function formatDate(unixTimestamp) {
+                        var date = new Date(unixTimestamp);
+
+                        var year = date.getFullYear();
+                        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are zero-based
+                        var day = ('0' + date.getDate()).slice(-2);
+                        var hours = ('0' + date.getHours()).slice(-2);
+                        var minutes = ('0' + date.getMinutes()).slice(-2);
+                        var seconds = ('0' + date.getSeconds()).slice(-2);
+
+                        var formattedDateTime = year + '-' + month + '-' + day;
+                        return formattedDateTime.toString();
                     }
-                </script>
+
+                    // Loop through your JSON data and structure it for the candlestick chart
+                    jsonData.results.forEach(function (result) {
+                        formattedData.push([
+                            formatDate(result.t), // Assuming 't' is the timestamp, convert to string
+                            result.l, // low price
+                            result.o, // open price
+                            result.c, // close price
+                            result.h // high price
+                        ]);
+                    });
+
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Date');
+                    data.addColumn('number', 'Open');
+                    data.addColumn('number', 'High');
+                    data.addColumn('number', 'Low');
+                    data.addColumn('number', 'Close');
+                    data.addRows(formattedData);
+
+                    var options = {
+                        legend: 'none',
+                        candlestick: {
+                            fallingColor: {strokeWidth: 0, fill: '#a52714'}, // Customize colors if needed
+                            risingColor: {strokeWidth: 0, fill: '#0f9d58'}
+
+                        }
+                    };
+
+                    var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+                    chart.draw(data, options);
+                }
+
+            </script>
+            <div class="Flex-container">
+                <div id="Chart-container" class="chart-container">
+                    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+                </div>
+                <pre th:text="${data}" id="jsonData1" style="display: none;"></pre>
             </div>
         </div>
     </div>
+<div class="d-flex p-2">I'm a flexbox container!</div>
+</div>
 </body>
 </html>
