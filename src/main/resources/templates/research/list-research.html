@@ -23,30 +23,23 @@
         <p class="my-5">
 
         </p>
-        <form th:action="@{/research/search}">
-            Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
-            &nbsp;
-            <input type="submit" value="Search" />
-            &nbsp;
-            <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
-        </form>
         <br>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="research : ${researchList}">
-                <td> <a th:href="@{/research/id={id}(id=${research.id})}" th:text=" ${research.id}" > </a></td>
-                <td th:text=" ${research.ticker}"></td>
-            </tr>
+            <div class="container mt-3">
+                <div class="d-flex justify-content-center">
+                    <div class="border rounded p-2" style="width: 545px; overflow-x: auto;">
+                        <div class="d-flex flex-nowrap">
+                            <div th:each="research : ${researchList}" class="border p-3 m-2 text-center" style="width: 150px;">
+                                <span th:text="${research.ticker}" class="d-block"></span>
+                                <!-- Add other information here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            </tbody>
-        </table>
-    </div>
+
+        </div>
+
     <div>
 
 
@@ -74,7 +67,7 @@
     </div>
     </div>
 </div>
-
+</div>
 </body>
 <script type="text/javascript">
     function clearSearch() {
