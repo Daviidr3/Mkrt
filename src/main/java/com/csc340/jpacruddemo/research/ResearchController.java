@@ -19,7 +19,11 @@ public class ResearchController {
     @Autowired
     ResearchService researchService;
 
-    //List all
+    /**
+     * Get all research objects.
+     * @param model Model
+     * @return research.
+     */
     @GetMapping("/all")
     public String listResearch(Model model) {
         model.addAttribute("researchList",
@@ -27,6 +31,12 @@ public class ResearchController {
         return "research/list-research";
     }
 
+    /**
+     * Search for a research object using keyword.
+     * @param model Model.
+     * @param keyword String
+     * @return research.
+     */
     @GetMapping("/search")
     public String getResearch(Model model, @Param("keyword")String keyword){
         model.addAttribute("researchList",
@@ -35,17 +45,38 @@ public class ResearchController {
         return "research/list-research";
 
     }
+
+    /**
+     * Serach for research object using ID.
+     * @param researchId long.
+     * @param model Model.
+     * @return Research.
+     */
     @GetMapping("/id={researchId}")
     public String getProduct(@PathVariable long researchId, Model model) {
         model.addAttribute("research",
                 researchService.getResearch(researchId));
         return "research/research-detail";
     }
+
+    /**
+     * Delete Research using its id.
+     * @param researchId long
+     * @param model Model
+     * @return all.
+     */
     @GetMapping ("/delete/id={researchId}")
     public String deleteResearch(@PathVariable long researchId, Model model){
         researchService.deleteResearch(researchId);
         return "redirect:/research/all";
     }
+
+    /**
+     * Create a Research object.
+     * @param research Research.
+     * @param model Model.
+     * @return all.
+     */
     @PostMapping("/create")
         public String createResearch(Research research, Model model) {
         String ticker = research.getTicker();
@@ -57,6 +88,12 @@ public class ResearchController {
             return "redirect:/research/all";
         }
     }
+
+    /**
+     * Update research object.
+     * @param research Research.
+     * @return all.
+     */
     @PostMapping ("/update")
     public String updateResearch(Research research){
 
@@ -64,11 +101,22 @@ public class ResearchController {
         return "redirect:/research/all";
     }
 
+    /**
+     * new research.
+     * @param model model.
+     * @return new research form.
+     */
     @GetMapping("/new-research")
     public String newResearchForm(Model model){
         return "research/new-research";
     }
 
+    /**
+     * Update research by its id.
+     * @param researchId long.
+     * @param model Model.
+     * @return Research.
+     */
     @GetMapping("/update/id={researchId}")
     public String updateResearchForm(@PathVariable long researchId, Model model){
         model.addAttribute("research",

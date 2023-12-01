@@ -16,7 +16,7 @@ public class ResearchAPIController {
 
     /**
      *
-     * @return
+     * @return research testing.
      */
     @GetMapping("/search-research")
     public String searchResearch() {
