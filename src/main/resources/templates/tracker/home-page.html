@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Search Research Data</h2>
+    <form action="#" th:action="@{/getTrackerData}" method="get">
+        <div class="form-group">
+            <label for="ticker">Enter Stock Ticker:</label>
+            <input type="text" class="form-control" id="ticker" name="ticker" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+</div>
+
+</body>
+</html>

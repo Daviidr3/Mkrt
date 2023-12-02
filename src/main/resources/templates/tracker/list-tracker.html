@@ -2,9 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Tracker</title>
 </head>
 <body>
+<div class="container">
 
+    <h1 style="text-align:center;">Stock Tracker</h1>
+
+    <div style="align-content: center;">
+        <p class="my-5">
+            <a href="/tracker/new-tracker" class="btn btn-primary" >Add Stock</a>
+        </p>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Stock Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tracker : ${trackerList}">
+                <td th:text=" ${tracker.ticker}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
 </body>
 </html>
