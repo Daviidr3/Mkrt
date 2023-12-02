@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  *
@@ -77,5 +78,15 @@ public class TrackerService {
     public boolean isTickerExists(String ticker) {
         List<Tracker> trackerList = repo.findByTicker(ticker);
         return !trackerList.isEmpty(); // If list is not empty, ticker exists
+    }
+    public List<String> getAllTrackerTickers() {
+        List<Tracker> trackers = repo.findAll();
+        List<String> tickerList = new ArrayList<>();
+
+        for (Tracker tracker : trackers) {
+            tickerList.add(tracker.getTicker());
+        }
+
+        return tickerList;
     }
 }

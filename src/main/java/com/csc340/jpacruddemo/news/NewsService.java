@@ -3,6 +3,7 @@ package com.csc340.jpacruddemo.news;
 import com.csc340.jpacruddemo.research.Research;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -11,7 +12,8 @@ import java.util.List;
  */
 @Service
 public class NewsService {
-
+    private final String API_URL_GEN = "https://api.polygon.io/v2/reference/news?apiKey=";
+    private final String API_URL="https://api.polygon.io/v2/reference/news?ticker=";
     @Autowired
     //Create repo object
     private NewsRepository repo;
@@ -74,4 +76,28 @@ public class NewsService {
         return !newsList.isEmpty(); // If list is not empty, ticker exists
     }
 
+    /**
+     * General news feed.
+     * @return news json.
+     */
+   public String getNewsData() {
+       String apiKey = "Q1a614o4pUCpa3Xw6OuBeAod65vsXbuA";
+       String apiUrl = API_URL_GEN + apiKey;
+
+       RestTemplate restTemplate = new RestTemplate();
+       return restTemplate.getForObject(apiUrl, String.class);
+   }
+
+    /**
+     * news on specific stock ticker.
+     * @param ticker String
+     * @return news json.
+     */
+    public String getNewsData(String ticker) {
+        String apiKey = "&apiKey=Q1a614o4pUCpa3Xw6OuBeAod65vsXbuAQ1a614o4pUCpa3Xw6OuBeAod65vsXbuA";
+        String apiUrl = API_URL+ticker+apiKey;
+
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(apiUrl, String.class);
+    }
 }

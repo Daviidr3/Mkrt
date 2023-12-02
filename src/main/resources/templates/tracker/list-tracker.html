@@ -15,20 +15,18 @@
             <a href="/tracker/new-tracker" class="btn btn-primary" >Add Stock</a>
         </p>
 
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Stock Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="tracker : ${trackerList}">
-                <td th:text=" ${tracker.ticker}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="d-flex justify-content-center">
+            <div class="border rounded p-2" style="width: 545px; overflow-x: auto;">
+                <div class="d-flex flex-nowrap">
+                    <div th:each="tracker : ${trackerList}" class="border p-3 m-2 text-center"
+                         style="width: 150px;">
+                        <span th:text="${tracker.ticker}" class="d-block"></span>
+                        <!-- Add other information here -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 
 </div>
 </body>

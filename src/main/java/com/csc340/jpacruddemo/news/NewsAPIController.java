@@ -24,5 +24,29 @@ public class NewsAPIController {
         return "news/testing";
     }
 
+    /**
+     * Makes an API request for general news.
+     * @param model Model
+     * @return news.
+     */
+    @GetMapping("/getNewsData")
+    public String getApiData(Model model) {
+        String data = newsService.getNewsData();
+        model.addAttribute("data", data);
+        return "research/testing";
+    }
 
+    /**
+     * Makes an API request for specific ticker.
+     * @param ticker String.
+     * @param model Model.
+     * @return
+     */
+    @GetMapping("/getNewsDataTicker")
+    public String getApiData(String ticker , Model model) {
+        String data = newsService.getNewsData(ticker);
+        model.addAttribute("ticker",ticker);
+        model.addAttribute("data", data);
+        return "research/testing";
+    }
 }
