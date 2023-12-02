@@ -12,6 +12,7 @@ import java.util.List;
     @Service
 public class TrackerService {
 
+
     @Autowired
     //create repo object.
     private TrackerRepository repo;
@@ -59,6 +60,14 @@ public class TrackerService {
      * @param tracker Research
      */
     void saveTracker(Tracker tracker){repo.save(tracker);}
+
+    public String getTrackerData(String stockName) {
+        String apiKey = "Q1a614o4pUCpa3Xw6OuBeAod65vsXbuA"; // Replace with your Polygon.io API key
+        String apiUrl = API_URL + stockName +"/prev?adjusted=true&apiKey=" + apiKey;
+
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(apiUrl, String.class);
+    }
 
      /**
      * Takes a String ticker and checks database if stock already exists.
