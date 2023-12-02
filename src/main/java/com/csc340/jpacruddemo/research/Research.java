@@ -26,7 +26,6 @@ public class Research {
     private String ticker;
 
     public Research(String ticker){
-
         this.ticker = ticker;
     }
 }
