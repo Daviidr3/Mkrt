@@ -47,7 +47,7 @@ public class ResearchController {
     }
 
     /**
-     * Serach for research object using ID.
+     * Search for research object using ID.
      * @param researchId long.
      * @param model Model.
      * @return Research.
