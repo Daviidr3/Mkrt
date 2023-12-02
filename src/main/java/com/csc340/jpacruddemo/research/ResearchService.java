@@ -68,8 +68,7 @@ public class ResearchService {
      * @return String Json information.
      */
     public String getResearchData(String stockName, String startDate, String endDate) {
-        String apiKey = "Q1a614o4pUCpa3Xw6OuBtring stockName, String startDate, String endDate) {\n" +
-"        String apiKey = \"QeAod65vsXbuA"; // Replace with your Polygon.io API key
+        String apiKey = "Q1a614o4pUCpa3Xw6OuBeAod65vsXbuA"; // Replace with your Polygon.io API key
         String apiUrl = API_URL + stockName + "/range/1/day/" + startDate + "/" + endDate +
                 "?adjusted=true&sort=asc&limit=120&apiKey=" + apiKey;
 
