@@ -13,6 +13,9 @@ import lombok.Setter;
 @Getter
 @Setter
 
+/**
+ * News object to hold a string of user's stock ticker and user id.
+ */
 public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
