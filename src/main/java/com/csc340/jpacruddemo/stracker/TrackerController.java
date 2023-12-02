@@ -16,112 +16,112 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/tracker")
 public class TrackerController {
-    //Create research service object to call its functions.
+    //Create tracker service object to call its functions.
     @Autowired
     TrackerService trackerService;
 
     /**
-     * Get all research objects.
+     * Get all tracker objects.
      * @param model Model
-     * @return research.
+     * @return tracker.
      */
     @GetMapping("/all")
-    public String listResearch(Model model) {
-        model.addAttribute("researchList",
+    public String listTracker(Model model) {
+        model.addAttribute("trackerList",
                 trackerService.getAllTracker());
-        return "research/list-research";
+        return "tracker/list-tracker";
     }
 
     /**
-     * Search for a research object using keyword.
+     * Search for a tracker object using keyword.
      * @param model Model.
      * @param keyword String
-     * @return research.
+     * @return tracker.
      */
     @GetMapping("/search")
-    public String getResearch(Model model, @Param("keyword")String keyword){
-        model.addAttribute("researchList",
-                trackerService.getAllResearch(keyword));
+    public String getTracker(Model model, @Param("keyword")String keyword){
+        model.addAttribute("trackerList",
+                trackerService.getAllTracker(keyword));
         model.addAttribute("keyword",keyword);
-        return "research/list-research";
+        return "tracker/list-tracker";
 
     }
 
     /**
-     * Serach for research object using ID.
-     * @param researchId long.
+     * Serach for tracker object using ID.
+     * @param trackerId long.
      * @param model Model.
-     * @return Research.
+     * @return Tracker.
      */
-    @GetMapping("/id={researchId}")
-    public String getProduct(@PathVariable long researchId, Model model) {
-        model.addAttribute("research",
-                trackerService.getResearch(researchId));
-        return "research/research-detail";
+    @GetMapping("/id={trackerId}")
+    public String getProduct(@PathVariable long trackerId, Model model) {
+        model.addAttribute("tracker",
+                trackerService.getTracker(trackerId));
+        return "tracker/tracker-detail";
     }
 
     /**
-     * Delete Research using its id.
-     * @param researchId long
+     * Delete Tracker using its id.
+     * @param trackerId long
      * @param model Model
      * @return all.
      */
-    @GetMapping ("/delete/id={researchId}")
-    public String deleteResearch(@PathVariable long researchId, Model model){
-        trackerService.deleteResearch(researchId);
-        return "redirect:/research/all";
+    @GetMapping ("/delete/id={trackerId}")
+    public String deleteTracker(@PathVariable long trackerId, Model model){
+        trackerService.deleteTracker(trackerId);
+        return "redirect:/tracker/all";
     }
 
     /**
-     * Create a Research object.
-     * @param research Research.
+     * Create a Tracker object.
+     * @param tracker Research.
      * @param model Model.
      * @return all.
      */
     @PostMapping("/create")
-        public String createResearch(Tracker research, Model model) {
-        String ticker = research.getTicker();
+        public String createTracker(Tracker tracker, Model model) {
+        String ticker = tracker.getTicker();
         if(trackerService.isTickerExists(ticker)){
             model.addAttribute("error", "Ticker already exists!"); // Error message
-            return "research/new-research";
+            return "tracker/new-tracker";
         } else {
-            trackerService.saveResearch(research);
-            return "redirect:/research/all";
+            trackerService.saveTracker(tracker);
+            return "redirect:/tracker/all";
         }
     }
 
     /**
-     * Update research object.
-     * @param research Research.
+     * Update tracker object.
+     * @param tracker Tracker.
      * @return all.
      */
     @PostMapping ("/update")
-    public String updateResearch(Tracker research){
+    public String updateTracker(Tracker tracker){
 
-        trackerService.saveResearch(research);
-        return "redirect:/research/all";
+        trackerService.saveTracker(tracker);
+        return "redirect:/tracker/all";
     }
 
     /**
-     * new research.
+     * new tracker.
      * @param model model.
-     * @return new research form.
+     * @return new tracker form.
      */
-    @GetMapping("/new-research")
-    public String newResearchForm(Model model){
-        return "research/new-research";
+    @GetMapping("/new-tracker")
+    public String newTrackerForm(Model model){
+        return "tracker/new-tracker";
     }
 
     /**
      * Update research by its id.
-     * @param researchId long.
+     * @param trackerId long.
      * @param model Model.
-     * @return Research.
+     * @return Tracker.
      */
-    @GetMapping("/update/id={researchId}")
-    public String updateResearchForm(@PathVariable long researchId, Model model){
-        model.addAttribute("research",
-                trackerService.getResearch(researchId));
-        return "research/update-research";
+    @GetMapping("/update/id={trackerId}")
+    public String updateTrackerForm(@PathVariable long trackerId, Model model){
+        model.addAttribute("tracker",
+                trackerService.getTracker(trackerId));
+        return "tracker/update-tracker";
     }
 }

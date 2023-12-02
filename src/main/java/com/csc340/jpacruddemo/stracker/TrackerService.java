@@ -9,9 +9,8 @@ import java.util.List;
  *
  * @author Salomon
  */
-public class TrackerService {
     @Service
-public class ResearchService {
+public class TrackerService {
 
     @Autowired
     //create repo object.
@@ -20,19 +19,19 @@ public class ResearchService {
     private final String API_URL = "https://api.polygon.io/v2/aggs/ticker/";
 
     /**
-     * Get all Research.
-     * @return list of Research tickers from repo.
+     * Get all Trackers.
+     * @return list of Tracker tickers from repo.
      */
-    public List<Tracker> getAllResearch(){
+    public List<Tracker> getAllTracker(){
         return repo.findAll();
     }
 
     /**
-     * Get Research that matches keyword.
+     * Get Trackers that matches keyword.
      * @param keyword the search term.
-     * @return the list of research tickers.
+     * @return the list of tracker tickers.
      */
-    public List<Tracker> getAllResearch(String keyword){
+    public List<Tracker> getAllTracker(String keyword){
         if(keyword != null){
             return repo.search(keyword);
 
@@ -41,24 +40,33 @@ public class ResearchService {
     }
 
     /**
-     * Searches research based on ID.
-     * @param researchId long.
-     * @return Research.
+     * Searches tracker based on ID.
+     * @param trackerId long.
+     * @return Tracker.
      */
-    public Tracker getTracker(long researchId){
-        return repo.getTrackerById(researchId);
+    public Tracker getTracker(long trackerId){
+        return repo.getReferenceById(trackerId);
     }
 
     /**
      * Deletes research object based on ID.
-     * @param researchId long.
+     * @param trackerId long.
      */
-    public void deleteTracker(long researchId){repo.deleteById(trackerId);}
+    public void deleteTracker(long trackerId){repo.deleteById(trackerId);}
 
     /**
      * Saves Research object to database.
-     * @param research Research
+     * @param tracker Research
      */
     void saveTracker(Tracker tracker){repo.save(tracker);}
 
+     /**
+     * Takes a String ticker and checks database if stock already exists.
+     * @param ticker String
+     * @return Boolean.
+     */
+    public boolean isTickerExists(String ticker) {
+        List<Tracker> trackerList = repo.findByTicker(ticker);
+        return !trackerList.isEmpty(); // If list is not empty, ticker exists
+    }
 }
