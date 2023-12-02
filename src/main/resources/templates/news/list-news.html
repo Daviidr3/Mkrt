@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+
+    <h1 style="text-align:center;">Stock News</h1>
+
+    <div style="align-content: center;">
+        <p class="my-5">
+            <a href="/news/new-news" class="btn btn-primary" >Add Stock</a>
+        </p>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Stock Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="news : ${newsList}">
+                <td th:text=" ${news.ticker}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
