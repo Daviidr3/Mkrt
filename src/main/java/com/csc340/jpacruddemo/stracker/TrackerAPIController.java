@@ -1,6 +1,7 @@
 package com.csc340.jpacruddemo.stracker;
 
 import com.csc340.jpacruddemo.research.ResearchService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 @Controller
 public class TrackerAPIController {
+    @Autowired
     private TrackerService trackerService;
 
     /**
@@ -23,7 +25,7 @@ public class TrackerAPIController {
      */
     @GetMapping("/search-tracker")
     public String searchTracker() {
-        return "research/testing";
+        return "tracker/list-tracker";
     }
 
     /**
@@ -37,9 +39,9 @@ public class TrackerAPIController {
                                 Model model) {
         String data = trackerService.getTrackerData(ticker);
 
-        model.addAttribute("researchTicker", ticker);
+        model.addAttribute("trackerTicker", ticker);
         model.addAttribute("data", data);
-        return "tracker/home-page";
+        return "tracker/list-tracker";
     }
 
 }

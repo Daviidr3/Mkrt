@@ -7,12 +7,11 @@
 </head>
 <body>
 <div class="container">
-
     <h1 style="text-align:center;">Stock Tracker</h1>
 
     <div style="align-content: center;">
         <p class="my-5">
-            <a href="/tracker/new-tracker" class="btn btn-primary" >Add Stock</a>
+            <a href="/tracker/new-tracker" class="btn btn-primary">Add Stock</a>
         </p>
 
         <div class="d-flex justify-content-center">
@@ -26,8 +25,42 @@
                 </div>
             </div>
         </div>
+
+        <!-- Search Bar -->
+        <div class="mt-4">
+            <form id="searchForm">
+                <label for="tickerInput">Enter Stock Ticker:</label>
+                <input type="text" id="tickerInput" name="ticker" required>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+
+        <!-- Display Area for JSON Data -->
+        <div id="jsonDataDisplay" class="mt-4">
+            <!-- JSON data will be displayed here -->
+        </div>
     </div>
 
+    <!-- JavaScript for handling form submission and fetching data -->
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const ticker = document.getElementById('tickerInput').value;
+
+            fetch(`/getTrackerData?ticker=${ticker}`)
+                .then(response => response.json())
+                .then(data => {
+                    const jsonDataDisplay = document.getElementById('jsonDataDisplay');
+                    jsonDataDisplay.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                })
+                .catch(error => {
+                    const jsonDataDisplay = document.getElementById('jsonDataDisplay');
+                    jsonDataDisplay.innerHTML = 'Error fetching data. Please try again.';
+                    console.error('Error:', error);
+                });
+        });
+    </script>
 </div>
 </body>
 </html>
