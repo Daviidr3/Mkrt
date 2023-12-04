@@ -20,15 +20,6 @@ public class TrackerAPIController {
     private TrackerService trackerService;
 
     /**
-     *
-     * @return research testing.
-     */
-    @GetMapping("/search-tracker")
-    public String searchTracker() {
-        return "tracker/list-tracker";
-    }
-
-    /**
      * Retrieves stock data service class from polygon.io.
      * @param ticker String
      * @param model String
