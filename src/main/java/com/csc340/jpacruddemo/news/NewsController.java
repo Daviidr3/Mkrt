@@ -22,7 +22,7 @@ public class NewsController {
 
     /**
      * Get all news objects.
-     * @param model Modle
+     * @param model Model
      * @return research
      */
     @GetMapping("/all")

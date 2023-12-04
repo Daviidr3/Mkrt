@@ -20,7 +20,6 @@ public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String ticker;
 
     public News(String ticker){

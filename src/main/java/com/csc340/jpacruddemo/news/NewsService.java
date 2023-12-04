@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Service
 public class NewsService {
-    private final String API_URL_GEN = "https://api.polygon.io/v2/reference/news?apiKey=";
+    private final String API_URL_GEN = "https://api.polygon.io/v2/reference/news?apiKey=0fSfNph40VfB_3sbPi3f8Oc1Jj0vKqMF";
     private final String API_URL="https://api.polygon.io/v2/reference/news?ticker=";
     @Autowired
     //Create repo object
