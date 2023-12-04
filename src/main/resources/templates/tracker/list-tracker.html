@@ -1,43 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org%22%3E/
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-<title>Tracker</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Tracker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
+    <div class="container">
 
-    <h1 style="text-align:center;">Stock Tracker</h1>
+        <h1 style="text-align:center;">Stock Tracker</h1>
 
-    <div style="align-content: center;">
-        <p class="my-5">
-            <a href="/tracker/new-tracker" class="btn btn-primary">Add Stock</a>
-        </p>
+        <div style="align-content: center;">
+            <p class="my-5">
+                <a href="/tracker/new-tracker" class="btn btn-primary">Add Stock</a>
+            </p>
 
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Stock Name</th>
-                <th>Info</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="tracker : ${trackerList}">
-                <td th:text="${tracker.ticker}"></td>
-                <td>
-                    <div th:utext="${@trackerService.getTrackerDataFormatted(tracker.ticker)}"></div>
-                </td>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Stock Name</th>
+                        <th>Info</th>
+                        <th>Action</th>                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tracker : ${trackerList}">
+                        <td th:text="${tracker.ticker}"></td>
+                        <td th:text="${@trackerService.getTrackerDataFormatted(tracker.ticker)}"></td>
 
-                <td>
-                    <a th:href="@{/tracker/update/id={id}(id=${tracker.id})}" class="btn btn-primary">Edit</a>
-                    <a th:href="@{/tracker/delete/id={id}(id=${tracker.id})}" class="btn btn-primary">Delete</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                        <td>
+                            <a th:href="@{/tracker/update/id={id}(id=${tracker.id})}" class="btn btn-primary">Edit</a>
+                            <a th:href="@{/tracker/delete/id={id}(id=${tracker.id})}" class="btn btn-primary">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 </body>
 </html>
+
