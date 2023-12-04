@@ -1,197 +1,300 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Search Research</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-</head>
-<style>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    /*navbar   */
+    .fa-1x {
+      font-size: 1.5rem;
+    }
+    .navbar-toggler.toggler-example {
+      cursor: pointer;
+    }
+    .dark-blue-text {
+      color: #0a38f5 !important;
+    }
+    .dark-pink-text {
+      color: #ac003a ;
+    }
+    .dark-amber-text {
+      color: #ff6f00;
+    }
+    .dark-teal-text {
+      color: #004d40;
+    }
+
     /* Apply styling to flex container */
     .flex-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px; /* Adjust the gap between flex items */
-        justify-content: center; /* Or any other flex container properties you prefer */
-
-
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px; /* Adjust the gap between flex items */
+      justify-content: center; /* Or any other flex container properties you prefer */
     }
 
     /* Apply styling to flex items */
     .flex-item {
-        flex: 0 0 calc(33.33% - 20px); /* Adjust item width */
-        padding: 20px;
-        border: 1px solid rgb(0, 0, 0) !important;
-        border-radius: 5px !important;
-        background-color: #f9f9f9; /* Or any other background color */
-        margin-bottom: 10px;
-        box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.4);
+      flex: 0 0 calc(33.33% - 20px); /* Adjust item width */
+      padding: 20px;
+      border: 1px solid rgb(0, 0, 0) !important;
+      border-radius: 5px !important;
+      background-color: #f9f9f9; /* Or any other background color */
+      margin-bottom: 10px;
+      box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.4);
     }
 
     input[type="date"] {
-        width: 150px; /* Adjust the width */
-        height: 30px; /* Adjust the height */
-        font-size: 14px; /* Adjust the font size */
-        /* Add any other styles you want to modify */
-
+      width: 150px; /* Adjust the width */
+      height: 30px; /* Adjust the height */
+      font-size: 14px; /* Adjust the font size */
+      /* Add any other styles you want to modify */
     }
 
-    .flex-container {
-        display: flex;
-        justify-content: center; /* Align content horizontally at center */
-        align-items: center; /* Align content vertically at center */
-        height: 500px; /* Set a fixed height for the flex container */
+    .Flex-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center horizontally */
+      justify-content: center; /* Center vertically */
+      text-align: center; /* Optional: Center text */
+      height: 100vh; /* Adjust height for full viewport height */
+    
     }
 
     .chart-container {
-        border: 1px solid #ccc; /* Border style */
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
-        width: 945px; /* Set a fixed width for the chart container */
+      border: 6px solid #cccccc59; /* Border style */
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+      width: auto; /* Set a fixed width for the chart container */
+      margin-top: -500px;
     }
-</style>
-<body>
-<div class="container mt-5">
-    <h2>Search Research Data</h2>
-    <form action="#" th:action="@{/getResearchData}" method="get">
+    body{
+        background-color: #004d40;
+        color:#f9f9f9;
+    }
+    
+  </style>
+  <body>
+    
+  
+  <div>
+    <!-- MDB -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
+    ></script>
+    <!--Navbar-->
+    <nav class="navbar navbar-light bg-light">
+      <!-- Navbar brand -->
+      <a class="navbar-brand" href="#">$MRKT</a>
+
+      <!-- Collapse button -->
+      <button
+        class="navbar-toggler toggler-example"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent1"
+        aria-controls="navbarSupportedContent1"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="dark-blue-text"><i class="fas fa-bars fa-1x"></i></span>
+      </button>
+
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+        </ul>
+        <!-- Links -->
+      </div>
+      <!-- Collapsible content -->
+    </nav>
+    <!--/.Navbar-->
+    </div>
+
+    <div class="container mt-5">
+      <h2>Search Research Data</h2>
+      <form action="#" th:action="@{/getResearchData}" method="get">
         <div class="form-group">
-            <label for="ticker">Enter Stock Ticker:</label>
-            <input type="text" class="form-control" id="ticker" name="ticker" required>
+          <label for="ticker">Enter Stock Ticker:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="ticker"
+            name="ticker"
+            required
+          />
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-2">
-                <label for="startDate">Start Date:</label>
-                <input type="date" class="form-control" id="startDate" name="startDate" required>
-            </div>
-            <div class="form-group col-md-2">
-                <label for="endDate">End Date:</label>
-                <input type="date" class="form-control" id="endDate" name="endDate" required>
-            </div>
+          <div class="form-group col-md-2">
+            <label for="startDate">Start Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="startDate"
+              name="startDate"
+              required
+            />
+          </div>
+          <div class="form-group col-md-2">
+            <label for="endDate">End Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="endDate"
+              name="endDate"
+              required
+            />
+          </div>
+          <div
+            class="form-group col-md-2 d-flex justify-content-center align-items-center mt-4"
+          >
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="setDates()"
+            >
+              Set for 1 month
+            </button>
+          </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Search</button>
-    </form>
+      </form>
+      <h1 th:text="${researchTicker}" style="text-align: center"></h1>
 
-<!--
-    <div th:if="${data}">
-        <h3>Data for Stock Ticker: <span th:text="${researchTicker}"></span></h3>
-        <pre th:text="${data}" id="jsonData" style="display: none;"></pre>
+      <script>
+        // Function to get the start date a month ago from today
+        function getStartDate() {
+          var today = new Date();
+          var startDate = new Date(
+            today.getFullYear(),
+            today.getMonth() - 1,
+            today.getDate()
+          );
+          return startDate.toISOString().slice(0, 10); // Return date in 'yyyy-mm-dd' format
+        }
 
-        <div class="flex-container">
-             Iterate through the fetched data to create flex items
-            <script type="text/javascript">
-                var jsonDataString = document.getElementById('jsonData').innerText;
-                var jsonData = JSON.parse(jsonDataString);
+        // Function to get today's date
+        function getEndDate() {
+          var today = new Date();
+          return today.toISOString().slice(0, 10); // Return date in 'yyyy-mm-dd' format
+        }
 
-                var resultsArray = jsonData.results;
+        // Populate start and end date fields with calculated values
+        document.getElementById("startDate").value = getStartDate();
+        document.getElementById("endDate").value = getEndDate();
 
-                if (resultsArray && resultsArray.length > 0) {
-                    var flexContainer = document.querySelector('.flex-container');
+        function setDates() {
+          var startDate = getStartDate();
+          var endDate = getEndDate();
 
-                    // Loop through the "results" array and create flex items
-                    resultsArray.forEach(function (result) {
-                        var flexItem = document.createElement('div');
-                        flexItem.classList.add('flex-item');
+          document.getElementById("startDate").value = startDate;
+          document.getElementById("endDate").value = endDate;
+        }
+      </script>
 
-                        function formatDate(unixTimestamp) {
-                            var date = new Date(unixTimestamp);
+      <script>
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
 
-                            var year = date.getFullYear();
-                            var month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are zero-based
-                            var day = ('0' + date.getDate()).slice(-2);
-                            var hours = ('0' + date.getHours()).slice(-2);
-                            var minutes = ('0' + date.getMinutes()).slice(-2);
-                            var seconds = ('0' + date.getSeconds()).slice(-2);
+        function drawChart() {
+          var jsonDataString = document.getElementById("jsonData1").innerText; // Replace with your JSON data
+          var jsonData = JSON.parse(jsonDataString);
 
-                            var formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
-                            return formattedDateTime.toString();
-                        }
+          var formattedData = [];
 
-                        // Populate flex item with data
-                        flexItem.innerHTML = `
-                                <p>Volume: ${result.v}</p>
-                                <p>Volume Weighted: ${result.vw}</p>
-                                <p>Open Price: ${result.o}</p>
-                                <p>Close Price: ${result.c}</p>
-                                <p>High Price: ${result.h}</p>
-                                <p>Low Price: ${result.l}</p>
-                                <p>Timestamp: ${formatDate(result.t)}</p>
-                            `;
+          function formatDate(unixTimestamp) {
+            var date = new Date(unixTimestamp);
 
-                        flexContainer.appendChild(flexItem); // Append the flex item to the container
-                    });
-                } else {
-                    console.log("No results found or empty results array.");
-                }
-            </script>
-            -->
-            <script>
-                google.charts.load('current', {'packages': ['corechart']});
-                google.charts.setOnLoadCallback(drawChart);
+            var year = date.getFullYear();
+            var month = ("0" + (date.getMonth() + 1)).slice(-2); // Months are zero-based
+            var day = ("0" + date.getDate()).slice(-2);
+            var hours = ("0" + date.getHours()).slice(-2);
+            var minutes = ("0" + date.getMinutes()).slice(-2);
+            var seconds = ("0" + date.getSeconds()).slice(-2);
 
-                function drawChart() {
-                    var jsonDataString = document.getElementById('jsonData1').innerText; // Replace with your JSON data
-                    var jsonData = JSON.parse(jsonDataString);
+            var formattedDateTime = year + "-" + month + "-" + day;
+            return formattedDateTime.toString();
+          }
 
-                    var formattedData = [];
+          // Loop through your JSON data and structure it for the candlestick chart
+          jsonData.results.forEach(function (result) {
+            formattedData.push([
+              formatDate(result.t), // Assuming 't' is the timestamp, convert to string
+              result.l, // low price
+              result.o, // open price
+              result.c, // close price
+              result.h, // high price
+            ]);
+          });
 
-                    function formatDate(unixTimestamp) {
-                        var date = new Date(unixTimestamp);
+          var data = new google.visualization.DataTable();
+          data.addColumn("string", "Date");
+          data.addColumn("number", "(LOW-HIGH),(OPEN-CLOSE)");
+          data.addColumn("number", "High");
+          data.addColumn("number", "Open");
+          data.addColumn("number", "Close");
+          data.addRows(formattedData);
 
-                        var year = date.getFullYear();
-                        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are zero-based
-                        var day = ('0' + date.getDate()).slice(-2);
-                        var hours = ('0' + date.getHours()).slice(-2);
-                        var minutes = ('0' + date.getMinutes()).slice(-2);
-                        var seconds = ('0' + date.getSeconds()).slice(-2);
+          var options = {
+            legend: "none",
+            candlestick: {
+              fallingColor: { strokeWidth: 0, fill: "#a52714" }, // Customize colors if needed
+              risingColor: { strokeWidth: 0, fill: "#0f9d58" },
+              vAxis: { gridlines: { count: 20 } },
+            },
+          };
 
-                        var formattedDateTime = year + '-' + month + '-' + day;
-                        return formattedDateTime.toString();
-                    }
-
-                    // Loop through your JSON data and structure it for the candlestick chart
-                    jsonData.results.forEach(function (result) {
-                        formattedData.push([
-                            formatDate(result.t), // Assuming 't' is the timestamp, convert to string
-                            result.l, // low price
-                            result.o, // open price
-                            result.c, // close price
-                            result.h // high price
-                        ]);
-                    });
-
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'Date');
-                    data.addColumn('number', 'Open');
-                    data.addColumn('number', 'High');
-                    data.addColumn('number', 'Low');
-                    data.addColumn('number', 'Close');
-                    data.addRows(formattedData);
-
-                    var options = {
-                        legend: 'none',
-                        candlestick: {
-                            fallingColor: {strokeWidth: 0, fill: '#a52714'}, // Customize colors if needed
-                            risingColor: {strokeWidth: 0, fill: '#0f9d58'}
-
-                        }
-                    };
-
-                    var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
-                    chart.draw(data, options);
-                }
-
-            </script>
-            <div class="Flex-container">
-                <div id="Chart-container" class="chart-container">
-                    <div id="chart_div" style="width: 900px; height: 500px;"></div>
-                </div>
-                <pre th:text="${data}" id="jsonData1" style="display: none;"></pre>
-            </div>
+          var chart = new google.visualization.CandlestickChart(
+            document.getElementById("chart_div")
+          );
+          chart.draw(data, options);
+        }
+      </script>
+      <div class="Flex-container">
+        <div id="Chart-container" class="chart-container">
+          <div id="chart_div" style="width: 900px; height: 500px"></div>
         </div>
+        <pre th:text="${data}" id="jsonData1" style="display: none"></pre>
+      </div>
     </div>
-<div class="d-flex p-2">I'm a flexbox container!</div>
-</div>
-</body>
+    <div class="d-flex p-2">I'm a flexbox container!</div>
+  </body>
 </html>
