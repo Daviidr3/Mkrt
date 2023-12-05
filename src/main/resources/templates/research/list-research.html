@@ -7,27 +7,31 @@
     <title>Research</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="#">$MRKT</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/tracker/all">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/tracker/all">Tracker</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/news/all">News</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/research/all">Research</a>
+                <a class="nav-link" href="/research/all">Research<span class="sr-only">( Current )</span></a>
             </li>
         </ul>
     </div>
@@ -85,27 +89,64 @@
         </div>
     </div>
 </div>
-<h1>Top Gainers</h1>
-<ul id="gainersList"></ul>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center">Top Gaining Stocks</h2>
+            <table id="gainersTable" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Ticker</th>
+                    <th>Percentage Change</th>
+                    <th>Change Today</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        fetch('/getGainers') // Fetch data from your endpoint
-            .then(response => response.json()) // Parse JSON from the response
+    // Function to fetch data from the API
+    function fetchGainersData() {
+        fetch('https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/gainers?apiKey=Q1a614o4pUCpa3Xw6OuBeAod65vsXbuA')
+            .then(response => response.json())
             .then(data => {
-                const gainersList = document.getElementById('gainersList');
-                // Assuming the JSON structure has an array with key "gainers"
-                data.gainers.forEach(gainer => {
-                    // Assuming each gainer object has properties like "ticker" and "changePercent"
-                    const listItem = document.createElement('li');
-                    listItem.textContent = gainer.ticker + ' - ' + gainer.changePercent + '%';
-                    gainersList.appendChild(listItem);
-                });
+                // Manipulate the fetched data and display it
+                displayGainersData(data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
+    }
+
+    // Function to display fetched data on the page in a table
+        function displayGainersData(data) {
+        let displayElement = document.querySelector('#gainersTable tbody');
+        displayElement.innerHTML = '';
+
+        // Loop through the data and create table rows
+        data.tickers.forEach(ticker => {
+        let row = displayElement.insertRow();
+
+        let cellTicker = row.insertCell(0);
+        cellTicker.textContent = ticker.ticker;
+
+        let cellPercentChange = row.insertCell(1);
+        cellPercentChange.textContent = `${ticker.todaysChangePerc}%`;
+        cellPercentChange.style.color = 'green';
+
+        let cellChangeToday = row.insertCell(2);
+        cellChangeToday.textContent = `${ticker.todaysChange}%`;;
+        cellChangeToday.style.color = 'blue';
     });
+    }
+
+        window.onload = function() {
+        fetchGainersData();
+    };
 </script>
 
 </body>
