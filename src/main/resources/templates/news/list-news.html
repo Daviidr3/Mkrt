@@ -145,7 +145,7 @@
             cursor: pointer;
             transition: background-color 0.3s;
             position: absolute;
-            right: 10px; /* Adjust the right position as needed */
+            right: 135px; /* Adjust the right position as needed */
             top: 10px; /* Adjust the top position as needed */
             bottom: 10px;
         }
@@ -153,6 +153,26 @@
         /* Hover effect for the profile button */
         .navbar-nav .profile-link button:hover {
             background-color: #218838; /* Darker green on hover */
+        }
+
+        /* New styles for the profile button */
+        .navbar-nav .logout button {
+            background-color: lightgray;
+            color: black;
+            font-size: 18px;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: absolute;
+            right: 25px; /* Adjust the right position as needed */
+            top: 10px; /* Adjust the top position as needed */
+            bottom: 10px;
+        }
+
+        /* Hover effect for the profile button */
+        .navbar-nav .logout button:hover {
+            background-color: darkgray; /* Darker green on hover */
         }
 
         .search-container {
@@ -202,6 +222,9 @@
             </li>
             <li class="nav-item profile-link">
                 <button class="btn btn-primary add-button" href="/user">Profile</button>
+            </li>
+            <li class="nav-item logout">
+                <button class="btn btn-primary add-button" href="/user">Logout</button>
             </li>
         </ul>
     </div>
