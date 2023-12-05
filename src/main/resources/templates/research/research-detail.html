@@ -19,7 +19,8 @@
             <h5 class="card-title">Research</h5>
             <p class="card-text" th:text=" 'ID: '+ ${research.id}" />
             <p class="card-text" th:text="'Ticker: '+${research.ticker}" />
-
+            <a th:href="@{/research/update/id={id}(id=${research.id})}" class="btn btn-primary">Edit</a>
+            <a th:href="@{/research/delete/id={id}(id=${research.id})}" class="btn btn-primary">Delete</a>
         </div>
     </div>
     <a href="/research/all" class="btn btn-primary" >Research list</a>
