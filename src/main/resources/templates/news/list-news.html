@@ -21,6 +21,14 @@
             margin-top: 56px; /* Adjusted margin to avoid overlapping with fixed navbar */
         }
 
+        /* Move the text "Stock News" to the left */
+        h1.text {
+            font-weight: bold;
+            font-size: 50px;
+            margin-left: 2%;
+            margin-bottom: 10px;
+        }
+
         .thumbnail {
             overflow: hidden;
             width: 60%;
@@ -146,6 +154,31 @@
         .navbar-nav .profile-link button:hover {
             background-color: #218838; /* Darker green on hover */
         }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            flex: 0.5; /* Adjust the flex value to control the length */
+            padding: 8px;
+            height: 40px; /* Adjust the height as needed */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-left: 215px;
+        }
+
+        .search-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -179,7 +212,21 @@
         <!-- News  -->
         <div class="container mt-4">
             <h1 class="text">Stock News</h1>
+            <form action="#" th:action="@{/getNewsDataTicker}" method="get">
+                <div class="search-container">
+                    <input
+                            type="text"
+                            class="search-box"
+                            id="ticker"
+                            name="ticker"
+                            placeholder="Enter Stock Ticker"
+                            required
+                    />
+                    <button class="btn btn-primary search-button">Search</button>
+                </div>
+            </form>
             <div class="row" id="newsContainer"></div>
+
         </div>
     </div>
 </div>

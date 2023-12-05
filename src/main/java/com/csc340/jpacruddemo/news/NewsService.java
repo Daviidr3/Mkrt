@@ -94,7 +94,7 @@ public class NewsService {
      * @return news json.
      */
     public String getNewsData(String ticker) {
-        String apiKey = "&apiKey=Q1a614o4pUCpa3Xw6OuBeAod65vsXbuAQ1a614o4pUCpa3Xw6OuBeAod65vsXbuA";
+        String apiKey = "&apiKey=Q1a614o4pUCpa3Xw6OuBeAod65vsXbuA";
         String apiUrl = API_URL+ticker+apiKey;
 
         RestTemplate restTemplate = new RestTemplate();

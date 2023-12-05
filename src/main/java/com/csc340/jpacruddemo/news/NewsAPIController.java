@@ -33,7 +33,7 @@ public class NewsAPIController {
     public String getApiData(Model model) {
         String data = newsService.getNewsData();
         model.addAttribute("data", data);
-        return "research/testing";
+        return "news/testing";
     }
 
     /**
@@ -47,6 +47,6 @@ public class NewsAPIController {
         String data = newsService.getNewsData(ticker);
         model.addAttribute("ticker",ticker);
         model.addAttribute("data", data);
-        return "research/testing";
+        return "news/list-news";
     }
 }
