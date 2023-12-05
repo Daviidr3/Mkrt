@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 
     <title>Stock News</title>
     <style>
@@ -15,6 +20,7 @@
             background-color: ghostwhite; /* Green background color */
             margin-top: 56px; /* Adjusted margin to avoid overlapping with fixed navbar */
         }
+
         .thumbnail {
             overflow: hidden;
             width: 60%;
@@ -24,6 +30,7 @@
             padding: 15px;
             margin-bottom: 20px;
         }
+
         .thumbnail img {
             max-width: 80%;
             height: auto;
@@ -119,32 +126,30 @@
             bottom: 30px;
             right: 30px;
         }
+
         /* New styles for the profile button */
         .navbar-nav .profile-link button {
             background-color: #28a745; /* Green background color */
-            margin-left: 820px;
             color: white;
             font-size: 18px;
             border: none;
             padding: 8px 16px;
             cursor: pointer;
             transition: background-color 0.3s;
-            position: relative;
-            top: 1px; /* Adjust the top position as needed */
         }
 
         /* Hover effect for the profile button */
         .navbar-nav .profile-link button:hover {
             background-color: #218838; /* Darker green on hover */
         }
-
     </style>
 </head>
 
 <body class="m-0 p-0">
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="#">$MRKT</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -226,14 +231,14 @@
                     const cardBody = $('<div class="card-body">');
 
                     // Display the title as a link to the article URL
-                    cardBody.append('<h2 class="card-title"><a href="' + article.article_url + '" target="_blank">' + article.title + '</a></h2>');
+                    cardBody.append('<h2 class="card-title"><a href="' + article.article_url + '" target="_blank">' +
+                        article.title + '</a></h2>');
 
                     // Display the author and published date
                     cardBody.append('<p class="author-name">Author: ' + article.author + '</p>');
                     cardBody.append('<p class="published-date">Published Date: ' + article.published_utc + '</p>');
 
                     cardBody.append('<button class="btn btn-primary add-button">Add</button>');
-
 
                     // Append the card body to the card
                     card.append(cardBody);
@@ -249,4 +254,5 @@
     });
 </script>
 </body>
+
 </html>
