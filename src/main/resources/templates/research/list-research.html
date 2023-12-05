@@ -13,6 +13,25 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/tracker/all">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/news/all">News</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/research/all">Research</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <div class="container">
 
     <h1 style="text-align:center;">Research Stocks</h1>
@@ -66,6 +85,29 @@
         </div>
     </div>
 </div>
+<h1>Top Gainers</h1>
+<ul id="gainersList"></ul>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('/getGainers') // Fetch data from your endpoint
+            .then(response => response.json()) // Parse JSON from the response
+            .then(data => {
+                const gainersList = document.getElementById('gainersList');
+                // Assuming the JSON structure has an array with key "gainers"
+                data.gainers.forEach(gainer => {
+                    // Assuming each gainer object has properties like "ticker" and "changePercent"
+                    const listItem = document.createElement('li');
+                    listItem.textContent = gainer.ticker + ' - ' + gainer.changePercent + '%';
+                    gainersList.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+</script>
+
 </body>
 <script type="text/javascript">
     function clearSearch() {

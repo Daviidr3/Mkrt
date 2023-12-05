@@ -43,4 +43,15 @@ public class ResearchAPIController {
         return "research/testing";
     }
 
+    /**
+     * Get Top 20 gainers from polygon.io
+     * @param model Model.
+     * @return String json of stock information from polygon.
+     */
+    @GetMapping("/getGainers")
+    public String getGainers (Model model){
+        String data = researchService.getGainers();
+        model.addAttribute("data", data);
+        return "research/list-research";
+    }
 }

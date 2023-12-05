@@ -76,6 +76,12 @@ public class ResearchService {
         return restTemplate.getForObject(apiUrl, String.class);
     }
 
+    public String getGainers(){
+        String apiUrl = "https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/gainers?apiKey=Q1a614o4pUCpa3Xw6OuBeAod65vsXbuA";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(apiUrl, String.class);
+    }
+
     /**
      * Takes a String ticker and checks database if stock already exists.
      * @param ticker String
