@@ -89,34 +89,23 @@ public class TrackerService {
         return formattedData;
     }
 
-    private String formatApiData(String apiData) {
-        // Extract relevant data using string manipulation (replace this with a proper JSON parsing library if possible)
-        String[] parts = apiData.split(",");
-        String close = parts[6].split(":")[1];
-        String high = parts[7].split(":")[1];
-        String low = parts[8].split(":")[1];
-        String transactions = parts[9].split(":")[1];
-        String open = parts[10].split(":")[1];
-        String timestamp = parts[11].split(":")[1];
-        String volume = parts[12].split(":")[1];
-        String vwPrice = parts[13].split(":")[1];
+   private String formatApiData(String apiData) {
+    // Extract relevant data using string manipulation (replace this with a proper JSON parsing library if possible)
+    String[] parts = apiData.split(",");
+    String close = parts[6].split(":")[1].trim();
+    String high = parts[7].split(":")[1].trim();
+    String low = parts[8].split(":")[1].trim();
+    String transactions = parts[9].split(":")[1].trim();
+    String open = parts[10].split(":")[1].trim();
 
-        // Format the data with descriptive labels
-        String formattedData = String.format(
-                "Close: %s, High: %s, Low: %s, Number of Transactions: %s, Open: %s, " +
-                        "Timestamp: %s, Volume: %s, Volume Weighted Average Price: %s",
-                close.trim(),
-                high.trim(),
-                low.trim(),
-                transactions.trim(),
-                open.trim(),
-                timestamp.trim(),
-                volume.trim(),
-                vwPrice.trim()
-        );
+    // Format the data with descriptive labels and HTML line breaks
+    String formattedData = "Open: " + open + "<br>" +
+            "Close: " + close + "<br>" +
+            "High: " + high + "<br>" +
+            "Low: " + low + "<br>" +
+            "Number of Transactions: " + transactions;
 
-        return formattedData;
-    }
-    
+    return formattedData;
+}
 
 }

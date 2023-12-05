@@ -1,28 +1,47 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Create New Tracker</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container mt-5">
-    <h2>Enter Stock Info</h2>
+    <head>
+        <meta charset="UTF-8">
+        <title>Create New Tracker</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">$MRKT</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/tracker/all">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/news/all">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/research/all">Research</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container mt-5">
+            <h2>Enter Stock Info</h2>
 
-    <!-- Display error message -->
-    <div th:if="${error}" class="alert alert-danger">
-        <p th:text="${error}"></p>
-    </div>
+            <!-- Display error message -->
+            <div th:if="${error}" class="alert alert-danger">
+                <p th:text="${error}"></p>
+            </div>
 
-    <!-- Research form -->
-    <form action="/tracker/create" method="post">
-        <div class="form-group">
-            <label for="ticker">Ticker:</label>
-            <input type="text" class="form-control" name="ticker" id="ticker" placeholder="Enter ticker" required>
+            <!-- Research form -->
+            <form action="/tracker/create" method="post">
+                <div class="form-group">
+                    <label for="ticker">Ticker:</label>
+                    <input type="text" class="form-control" name="ticker" id="ticker" placeholder="Enter ticker" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
-</body>
+    </body>
 </html>

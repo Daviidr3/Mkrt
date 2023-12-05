@@ -29,9 +29,9 @@ public class Tracker {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private long id;
-    private String ticker;     
+    private String ticker;
 
     public Tracker(String ticker) {
-        this.ticker = ticker; 
-    } 
+        this.ticker = ticker;
+    }
 }

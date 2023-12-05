@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/tracker")
 public class TrackerController {
+
     //Create tracker service object to call its functions.
     @Autowired
     TrackerService trackerService;
 
     /**
      * Get all tracker objects.
+     *
      * @param model Model
      * @return tracker.
      */
@@ -34,21 +36,23 @@ public class TrackerController {
 
     /**
      * Search for a tracker object using keyword.
+     *
      * @param model Model.
      * @param keyword String
      * @return tracker.
      */
     @GetMapping("/search")
-    public String getTracker(Model model, @Param("keyword")String keyword){
+    public String getTracker(Model model, @Param("keyword") String keyword) {
         model.addAttribute("trackerList",
                 trackerService.getAllTracker(keyword));
-        model.addAttribute("keyword",keyword);
+        model.addAttribute("keyword", keyword);
         return "tracker/list-tracker";
 
     }
 
     /**
      * Serach for tracker object using ID.
+     *
      * @param trackerId long.
      * @param model Model.
      * @return Tracker.
@@ -62,26 +66,28 @@ public class TrackerController {
 
     /**
      * Delete Tracker using its id.
+     *
      * @param trackerId long
      * @param model Model
      * @return all.
      */
-    @GetMapping ("/delete/id={trackerId}")
-    public String deleteTracker(@PathVariable long trackerId, Model model){
+    @GetMapping("/delete/id={trackerId}")
+    public String deleteTracker(@PathVariable long trackerId, Model model) {
         trackerService.deleteTracker(trackerId);
         return "redirect:/tracker/all";
     }
 
     /**
      * Create a Tracker object.
+     *
      * @param tracker Research.
      * @param model Model.
      * @return all.
      */
     @PostMapping("/create")
-        public String createTracker(Tracker tracker, Model model) {
+    public String createTracker(Tracker tracker, Model model) {
         String ticker = tracker.getTicker();
-        if(trackerService.isTickerExists(ticker)){
+        if (trackerService.isTickerExists(ticker)) {
             model.addAttribute("error", "Ticker already exists!"); // Error message
             return "tracker/new-tracker";
         } else {
@@ -92,11 +98,12 @@ public class TrackerController {
 
     /**
      * Update tracker object.
+     *
      * @param tracker Tracker.
      * @return all.
      */
-    @PostMapping ("/update")
-    public String updateTracker(Tracker tracker){
+    @PostMapping("/update")
+    public String updateTracker(Tracker tracker) {
 
         trackerService.saveTracker(tracker);
         return "redirect:/tracker/all";
@@ -104,25 +111,26 @@ public class TrackerController {
 
     /**
      * new tracker.
+     *
      * @param model model.
      * @return new tracker form.
      */
     @GetMapping("/new-tracker")
-    public String newTrackerForm(Model model){
+    public String newTrackerForm(Model model) {
         return "tracker/new-tracker";
     }
 
     /**
      * Update research by its id.
+     *
      * @param trackerId long.
      * @param model Model.
      * @return Tracker.
      */
     @GetMapping("/update/id={trackerId}")
-    public String updateTrackerForm(@PathVariable long trackerId, Model model){
+    public String updateTrackerForm(@PathVariable long trackerId, Model model) {
         model.addAttribute("tracker",
                 trackerService.getTracker(trackerId));
         return "tracker/update-tracker";
     }
 }
-
