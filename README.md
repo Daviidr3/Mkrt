@@ -22,4 +22,7 @@
 > * Clean and Build
 > * Run
 > * Type: "http://localhost:8080/news/all" to start the application
+
+
  
+![Login](https://github.com/Daviidr3/Mkrt/assets/122686318/aaeb1190-65a5-411a-aad0-01da879bf80a)
